@@ -22,7 +22,7 @@ class Auth
     public function sign(array $data): string
     {
         // 检查字段类型如果为数组时转为字符串类型
-        $data = array_walk($data, function (&$value) {
+        array_walk($data, function (&$value) {
             if (is_array($value)) {
                 $value = json_encode($value, JSON_UNESCAPED_UNICODE);
             }

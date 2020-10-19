@@ -6,6 +6,7 @@ namespace lgdz;
 
 class Auth
 {
+    // 密钥
     private $secret;
 
     /**
@@ -17,8 +18,10 @@ class Auth
         $this->secret = $secret;
     }
 
+    // 生成签名
     public function sign(array $data): string
     {
+        // 检查字段类型如果为数组时转为字符串类型
         $data = array_walk($data, function (&$value) {
             if (is_array($value)) {
                 $value = json_encode($value, JSON_UNESCAPED_UNICODE);
@@ -31,9 +34,13 @@ class Auth
         return md5($string);
     }
 
+    // 验证签名
     public function verify(array $data): bool
     {
-        $sign = $data['sign'];
+        $sign = $data['sign'] ?? null;
+        if (is_null($sign)) {
+            return false;
+        }
         unset($data['sign']);
         return $this->sign($data) === $sign;
     }

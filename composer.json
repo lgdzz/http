@@ -1,0 +1,17 @@
+{
+  "name": "lgdz/http",
+  "version": "1.0.0",
+  "description": "http class",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0",
+    "php-curl-class/php-curl-class": "^8.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "lgdz\\": "src"
+    }
+  }
+}

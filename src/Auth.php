@@ -19,6 +19,12 @@ class Auth
 
     public function sign(array $data): string
     {
+        $data = array_walk($data, function (&$value) {
+            if (is_array($value)) {
+                $value = json_encode($value, JSON_UNESCAPED_UNICODE);
+            }
+        });
+
         $data['secret'] = $this->secret;
         ksort($data);
         $string = http_build_query($data);
